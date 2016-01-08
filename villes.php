@@ -66,17 +66,21 @@ function read_villes() {
 		 */
 
 		//$sql = "SELECT * FROM `villes` LIMIT 5";		
-		$sql = "SELECT * FROM `villes` WHERE MAJ LIKE 'bourg%' ";
+		$sql = "SELECT * FROM `villes`";
 		
 		if($stmt = $pdo->query($sql)) {
 			$items = $stmt->fetchAll();
 		}
 		
+		$newArray = array(
+			"villes" => $items
+		);
+		
 		/**
 		 * Affichage terminal : présentation en JSON
 		 */	
 		header('Content-Type: application/json');		
-		echo json_encode($items);
+		echo json_encode($newArray);
 		// corrigé par Antunes Lonny
 
 }
