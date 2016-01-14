@@ -1,5 +1,10 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^api/ville/$ villes.php [QSA]
-RewriteRule ^api/ville/([0-9_-]+)$ villes.php?id=$1 [QSA]
+RewriteRule ^api/ville/$ api.php [QSA]
+
+# Route qui permet de récupérer les infos d'une ville en fournissant l'ID de la ville
+RewriteRule ^api/getville/([0-9_-]+)$ api.php?q=$1 [QSA]
+
+# Route qui permet de récupérer les infos d'une ville en fournissant le nom de filtre ET l'ID de la ville
+RewriteRule ^api/getville/([a-zA-Z0-9_-]+)/([0-9_-]+)$ api.php?filtre=$1&q=2 [QSA]

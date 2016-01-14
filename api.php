@@ -21,6 +21,18 @@ try {
 $cols = array('Nom_Ville', 'MAJ', 'Code_Postal', 'Code_INSEE', 'Code_Region', 'Latitude', 'Longitude', 'Eloignement');
 
 /**
+ * Array de correspondances de noms de colonnes
+ */
+
+$colonnesConverter = array(
+    'nom' => 'Nom_Ville',
+    'maj' => 'MAJ',
+    'codepostal' => 'Code_Postal',
+    'codeinsee' => 'Code_INSEE',
+    'coderegion' => 'Code_Region'
+);
+
+/**
  * Verbe HTTP
  */
 $method = $_SERVER['REQUEST_METHOD'];
@@ -77,19 +89,22 @@ function getVilles() {
 }
 
 /**
- * Cherche une ville en fonction du paramètre id
+ * Cherche une ville en fonction du paramètre q
  */
 function getVille() {
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+    global $pdo, $colonnesConverter, $sql;
+    
+    if (isset($_GET['q'])) {
+        $q = $_GET['q'];
         
-        global $pdo, $cols, $sql;
-        
-        /**
-         * Requète SQL
-         */
-        //$sql = "SELECT * FROM `villes` LIMIT 5";		
-        $sql = "SELECT * FROM `villes` WHERE Code_INSEE=$id";
+        if(isset($_GET['filtre']) AND array_key_exists($_GET['filtre'], $colonnesConverter)){
+            // On a bien un nom de colonne valqe on continue
+            $colRech = $colonnesConverter[$_GET['filtre']];
+            
+            $sql = "SELECT * FROM `villes` WHERE $colRech=$q";
+        }else{
+            $sql = "SELECT * FROM `villes` WHERE Code_INSEE=$q";
+        }
 
         if ($stmt = $pdo->query($sql)) {
             $items = $stmt->fetchAll();
@@ -105,7 +120,7 @@ function getVille() {
         header('Content-Type: application/json');
         echo json_encode($newArray);
     } else {
-        throw new \Exception('You must provide an argument for the city you are looking for.');
+        throw new \Exception('You must provqe an argument for the city you are looking for.');
     }
 }
 
