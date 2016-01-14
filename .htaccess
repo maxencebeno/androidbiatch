@@ -1,1 +1,5 @@
+Options +FollowSymlinks
 RewriteEngine On
+
+RewriteRule ^api/ville/$ villes.php [QSA]
+RewriteRule ^api/ville/([0-9_-]+)$ villes.php?id=$1 [QSA]
