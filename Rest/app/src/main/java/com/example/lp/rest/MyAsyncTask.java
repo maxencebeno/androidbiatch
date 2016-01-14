@@ -23,14 +23,12 @@ import java.util.HashMap;
  */
 public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
     ListView lv;
-    ArrayList<HashMap<String, HashMap<String, String>>> list;
-    HashMap<String, HashMap<String, String>> villeEtCoordonnees;
     HashMap<String, String> coordonnees;
-    //ArrayList<HashMap<String, String>> list;
+    ArrayList<Ville> list;
     SimpleAdapter mSchedule;
     HashMap<String, String> villeArray;
 
-    public MyAsyncTask(SimpleAdapter mSchedule, ArrayList<HashMap<String, HashMap<String, String>>> list) {
+    public MyAsyncTask(SimpleAdapter mSchedule, ArrayList<Ville> list) {
         this.mSchedule = mSchedule;
         this.list = list;
     }
@@ -78,10 +76,7 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
 
             for (int i = 0 ; i < villes.length() ; i++) {
                 JSONObject ville = villes.getJSONObject(i);
-                coordonnees.put(ville.getString("Latitude"), ville.getString("Longitude"));
-                villeEtCoordonnees.put(ville.getString("MAJ"), coordonnees);
-                list.add(villeEtCoordonnees);
-                villeArray = new HashMap<String, String>();
+                villeArray = new Ville();
                 villeArray.put("titre", ville.getString("Code_Postal"));
                 villeArray.put("ville", ville.getString("MAJ"));
                 list.add(villeArray);
@@ -89,7 +84,6 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
 
             lv.setAdapter(mSchedule);
             mSchedule.notifyDataSetChanged();
-            Log.v("test", "test");
 
         } catch (JSONException e) {
             e.printStackTrace();
