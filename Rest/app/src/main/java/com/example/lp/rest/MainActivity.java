@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -27,7 +28,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     ListView lv;
     ArrayList<Ville> list;
-    SimpleAdapter mSchedule;
+    VilleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,18 @@ public class MainActivity extends AppCompatActivity {
         if(!nomVille.getText().equals("")){
 
         }
-        URL url = new URL("http://10.0.2.2:80/androidlpmetinet/villes.php");
-        lv = (ListView) findViewById(R.id.listView);
+        URL url = new URL("http://10.0.2.2:80");
+
         list = new ArrayList<Ville>();
-        mSchedule = new SimpleAdapter(getApplicationContext(), list, R.layout.list_view,
+        lv = (ListView) findViewById(R.id.listView);
+
+        adapter = new VilleAdapter(this, R.layout.list_view, list);
+
+        //Set the above adapter as the adapter of choice for our list
+        //lv.setAdapter(adapter);
+
+        new MyAsyncTask(adapter, list).execute(url, lv, adapter);
+        /*mSchedule = new SimpleAdapter(getApplicationContext(), list, R.layout.list_view,
                 new Ville[] {}, new int[] { R.id.titre, R.id.ville });
         new MyAsyncTask(mSchedule, list).execute(url, lv, mSchedule);
         mSchedule.notifyDataSetChanged();
@@ -65,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 //on affiche la boite de dialogue
                 adb.show();
             }
-        });
+        });*/
 
     }
 

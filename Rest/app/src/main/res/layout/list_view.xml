@@ -3,17 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:id="@+id/titre"
+        android:id="@+id/ville"
         android:textColor="#000000" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:id="@+id/ville"
+        android:id="@+id/codepostal"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/latitude"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/longitude"
         android:textColor="#000000" />
 
 

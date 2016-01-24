@@ -2,6 +2,7 @@ package com.example.lp.rest;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -23,13 +24,11 @@ import java.util.HashMap;
  */
 public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
     ListView lv;
-    HashMap<String, String> coordonnees;
     ArrayList<Ville> list;
-    SimpleAdapter mSchedule;
-    HashMap<String, String> villeArray;
+    VilleAdapter adapter;
 
-    public MyAsyncTask(SimpleAdapter mSchedule, ArrayList<Ville> list) {
-        this.mSchedule = mSchedule;
+    public MyAsyncTask(VilleAdapter adapter, ArrayList<Ville> list) {
+        this.adapter = adapter;
         this.list = list;
     }
 
@@ -76,14 +75,16 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
 
             for (int i = 0 ; i < villes.length() ; i++) {
                 JSONObject ville = villes.getJSONObject(i);
-                villeArray = new Ville();
-                villeArray.put("titre", ville.getString("Code_Postal"));
-                villeArray.put("ville", ville.getString("MAJ"));
+                Ville villeArray = new Ville();
+                villeArray.setNom(ville.getString("Nom_Ville"));
+                villeArray.setNom(ville.getString("MAJ"));
+                villeArray.setCodePostal(ville.getString("Code_Postal"));
+                villeArray.setLongitude(ville.getString("Longitude"));
+                villeArray.setLongitude(ville.getString("Latitude"));
                 list.add(villeArray);
             }
 
-            lv.setAdapter(mSchedule);
-            mSchedule.notifyDataSetChanged();
+            lv.setAdapter(adapter);
 
         } catch (JSONException e) {
             e.printStackTrace();

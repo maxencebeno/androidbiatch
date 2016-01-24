@@ -7,11 +7,11 @@ public class Ville {
 
     protected String nom;
     protected String maj;
-    protected int codePostal;
-    protected float longitude;
-    protected float latitude;
+    protected String codePostal;
+    protected String longitude;
+    protected String latitude;
 
-    public Ville(String nom, String maj, int codePostal, float longitude, float latitude) {
+    public Ville(String nom, String maj, String codePostal, String longitude, String latitude) {
         this.nom = nom;
         this.maj = maj;
         this.codePostal = codePostal;
@@ -39,27 +39,32 @@ public class Ville {
         this.maj = maj;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
-    public float getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    @Override
+    public String toString() {
+        return this.getNom() + ", " + this.getCodePostal() + ", " + this.getLatitude() + ", " + this.getLongitude();
     }
 }
