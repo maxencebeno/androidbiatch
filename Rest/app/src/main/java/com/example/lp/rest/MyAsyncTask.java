@@ -90,9 +90,4 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
             e.printStackTrace();
         }
     }
-
-    /*@Override
-    protected void onPostExecute(String result) {
-        tv.setText(result);
-    }*/
 }

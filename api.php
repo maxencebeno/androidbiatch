@@ -9,7 +9,7 @@
  * Connexion au SGBD
  */
 try {
-    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=bd_rest', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=bd_rest', 'root', 'root');
 } catch (PDOException $e) {
     die("Erreur : " . $e->getMessage());
 }
@@ -101,7 +101,7 @@ function getVille() {
             // On a bien un nom de colonne valqe on continue
             $colRech = $colonnesConverter[$_GET['filtre']];
             
-            $sql = "SELECT * FROM `villes` WHERE $colRech=$q";
+            $sql = "SELECT * FROM `villes` WHERE $colRech LIKE '%$q%'";
         }else{
             $sql = "SELECT * FROM `villes` WHERE Code_INSEE=$q";
         }

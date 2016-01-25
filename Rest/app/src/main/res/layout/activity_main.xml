@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.lp.rest.MainActivity">
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_marginTop="107dp"
-        android:layout_below="@+id/search_input"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="59dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -33,54 +34,66 @@
         android:layout_below="@+id/asyncbutton"
         android:layout_alignParentStart="true"
         android:layout_marginTop="37dp"
-        android:text="Recherchez une ville"
-        android:layout_alignEnd="@+id/radioButton2" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nom de la ville"
-        android:id="@+id/radioButton"
-        android:layout_below="@+id/search_input"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:checked="true" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code postal"
-        android:id="@+id/radioButton2"
-        android:checked="false"
-        android:layout_alignBottom="@+id/radioButton"
-        android:layout_alignEnd="@+id/asyncbutton" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code INSEE"
-        android:id="@+id/radioButton3"
-        android:checked="false"
-        android:layout_below="@+id/radioButton"
-        android:layout_alignParentStart="true" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code région"
-        android:id="@+id/radioButton4"
-        android:checked="false"
-        android:layout_alignTop="@+id/radioButton3"
-        android:layout_alignStart="@+id/radioButton2" />
+        android:text="Recherchez une ville" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rech"
+        android:text="Rechercher"
         android:id="@+id/button"
-        android:layout_above="@+id/listView"
-        android:layout_toEndOf="@+id/asyncbutton"
-        android:layout_alignTop="@+id/search_input"
         android:clickable="true"
-        android:onClick="onAsyncButtonClick" />
+        android:onClick="onAsyncButtonClick"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/search_input"
+        android:layout_toStartOf="@+id/button"
+        android:layout_alignEnd="@+id/listView">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="Nom de la ville"
+            android:id="@+id/nom_ville"
+            android:checked="true"
+            android:layout_below="@+id/search_input"
+            android:layout_alignParentStart="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="Code postal"
+            android:id="@+id/cp_ville"
+            android:checked="false"
+            android:layout_alignTop="@+id/nom_ville"
+            android:layout_toStartOf="@+id/button" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="Code INSEE"
+            android:id="@+id/code_insee"
+            android:checked="false"
+            android:layout_below="@+id/nom_ville"
+            android:layout_alignParentStart="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="Code région"
+            android:id="@+id/code_region"
+            android:checked="false"
+            android:layout_below="@+id/cp_ville"
+            android:layout_alignStart="@+id/cp_ville" />
+    </RadioGroup>
+
 </RelativeLayout>

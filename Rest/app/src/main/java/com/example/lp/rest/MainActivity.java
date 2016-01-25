@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Ville> list;
     VilleAdapter adapter;
 
+    String[] filtres = {"Nom de la ville", "Code postal", "Code INSEE", "Code région"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,43 +44,83 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAsyncButtonClick(View view) throws IOException {
         EditText nomVille = (EditText) findViewById(R.id.search_input);
-        if(!nomVille.getText().equals("")){
 
-        }
-        URL url = new URL("http://10.0.2.2:80");
+        if (!nomVille.getText().equals("")) {
+            RadioButton nom = (RadioButton) findViewById(R.id.nom_ville);
+            RadioButton cp = (RadioButton) findViewById(R.id.cp_ville);
+            RadioButton insee = (RadioButton) findViewById(R.id.code_insee);
+            RadioButton region = (RadioButton) findViewById(R.id.code_region);
+            URL url = null;
 
-        list = new ArrayList<Ville>();
-        lv = (ListView) findViewById(R.id.listView);
+            RadioGroup radioButtonGroup = (RadioGroup) findViewById(R.id.radioGroup);
+            int selectedId = radioButtonGroup.getCheckedRadioButtonId();
+            String filtre = "";
+            Log.d("selectedId", String.valueOf(selectedId));
+            Log.d("nom_ville", String.valueOf(R.id.nom_ville));
+            Log.d("getText", String.valueOf(nomVille.getText()));
 
-        adapter = new VilleAdapter(this, R.layout.list_view, list);
-
-        //Set the above adapter as the adapter of choice for our list
-        //lv.setAdapter(adapter);
-
-        new MyAsyncTask(adapter, list).execute(url, lv, adapter);
-        /*mSchedule = new SimpleAdapter(getApplicationContext(), list, R.layout.list_view,
-                new Ville[] {}, new int[] { R.id.titre, R.id.ville });
-        new MyAsyncTask(mSchedule, list).execute(url, lv, mSchedule);
-        mSchedule.notifyDataSetChanged();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                //on récupère la HashMap contenant les infos de notre item (titre, description, img)
-                HashMap<Ville> map = (HashMap<Ville>) lv.getItemAtPosition(position);
-                //on créer une boite de dialogue
-                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
-                //on attribut un titre à notre boite de dialogue
-                adb.setTitle("Ville choisie");
-                //on insère un message à notre boite de dialogue, et ici on affiche le titre de l'item cliqué
-                adb.setMessage("Votre choix : " + map.get("ville"));
-                //on indique que l'on veut le bouton ok à notre boite de dialogue
-                adb.setPositiveButton("Ok", null);
-                //on affiche la boite de dialogue
-                adb.show();
+            // Check which radio button was clicked
+            switch (selectedId) {
+                case R.id.nom_ville:
+                    filtre = this.getFiltre((String) nom.getText());
+                    url = new URL("http://10.0.2.2:80?filtre=" + filtre + "&q=" + nomVille.getText());
+                    break;
+                case R.id.cp_ville:
+                    filtre = this.getFiltre((String) cp.getText());
+                    url = new URL("http://10.0.2.2:80?filtre=" + filtre + "&q=" + nomVille.getText());
+                    break;
+                case R.id.code_insee:
+                    filtre = this.getFiltre((String) insee.getText());
+                    url = new URL("http://10.0.2.2:80?filtre=" + filtre + "&q=" + nomVille.getText());
+                    break;
+                case R.id.code_region:
+                    filtre = this.getFiltre((String) region.getText());
+                    url = new URL("http://10.0.2.2:80?filtre=" + filtre + "&q=" + nomVille.getText());
+                    break;
             }
-        });*/
 
+            list = new ArrayList<Ville>();
+            lv = (ListView) findViewById(R.id.listView);
+
+            adapter = new VilleAdapter(this, R.layout.list_view, list);
+
+            new MyAsyncTask(adapter, list).execute(url, lv, adapter);
+
+        } else {
+            URL url = new URL("http://10.0.2.2:80");
+
+            list = new ArrayList<Ville>();
+            lv = (ListView) findViewById(R.id.listView);
+
+            adapter = new VilleAdapter(this, R.layout.list_view, list);
+
+            new MyAsyncTask(adapter, list).execute(url, lv, adapter);
+        }
+
+
+    }
+
+    public String getFiltre(String nomFiltre) {
+        String filtre = "";
+
+        for (int i = 0; i < filtres.length; i++) {
+            switch (filtres[i]) {
+                case "Nom de la ville":
+                    filtre = "nom";
+                    break;
+                case "Code postal":
+                    filtre = "codepostal";
+                    break;
+                case "Code INSEE":
+                    filtre = "codeinsee";
+                    break;
+                case "Code région":
+                    filtre = "coderegion";
+                    break;
+            }
+        }
+
+        return filtre;
     }
 
 }
