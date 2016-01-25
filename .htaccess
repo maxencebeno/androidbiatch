@@ -8,3 +8,6 @@ RewriteRule ^api/getville/([0-9_-]+)$ api.php?q=$1 [QSA]
 
 # Route qui permet de récupérer les infos d'une ville en fournissant le nom de filtre ET l'ID de la ville
 RewriteRule ^api/getville/([a-zA-Z0-9_-]+)/([0-9_-]+)$ api.php?filtre=$1&q=2 [QSA]
+
+# Route qui permet de supprimer une ville en fournissant l'ID de la ville
+RewriteRule ^api/deleteville api.php [QSA]

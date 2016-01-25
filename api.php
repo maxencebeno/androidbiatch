@@ -55,7 +55,15 @@ switch ($method) {
         //update_ville();
     } break;
     case 'POST' : {
-        //create_ville();
+        if(isset($_POST['action'])) {
+            if ($_POST['action'] == "delete") {
+                deleteVille();
+            } else if ($_POST['action'] == "create") {
+                createVille();
+            } else if ($_POST['action'] == "update") {
+                updateVille();
+            }
+        }
     } break;
     default : {
         echo "méthode inconnue";
@@ -121,6 +129,22 @@ function getVille() {
         echo json_encode($newArray);
     } else {
         throw new \Exception('You must provqe an argument for the city you are looking for.');
+    }
+}
+
+
+/**
+ * Supprime une ville à partir de son ID
+ */
+function deleteVille()
+{
+    global $pdo, $sql;
+
+    if (isset($_POST['codeinsee'])) {
+        $sql = "DELETE FROM villes WHERE Code_INSEE =  :Code_INSEE";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':Code_INSEE', $_POST['codeinsee'], PDO::PARAM_INT);
+        $stmt->execute();
     }
 }
 
