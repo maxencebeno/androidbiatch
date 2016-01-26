@@ -1,11 +1,7 @@
 package com.example.lp.rest;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +13,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by lp on 08/01/2016.
@@ -80,7 +75,8 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
                 villeArray.setNom(ville.getString("MAJ"));
                 villeArray.setCodePostal(ville.getString("Code_Postal"));
                 villeArray.setLongitude(ville.getString("Longitude"));
-                villeArray.setLongitude(ville.getString("Latitude"));
+                villeArray.setLatitude(ville.getString("Latitude"));
+                villeArray.setCodeinsee(ville.getString("Code_INSEE"));
                 list.add(villeArray);
             }
 

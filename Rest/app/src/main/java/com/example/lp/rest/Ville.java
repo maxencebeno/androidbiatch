@@ -10,17 +10,19 @@ public class Ville {
     protected String codePostal;
     protected String longitude;
     protected String latitude;
-    private boolean selected;
-    private Boolean running;
+    protected String codeinsee;
+    protected String coderegion;
+    protected String eloignement;
 
-    public Ville(String nom, String maj, String codePostal, String longitude, String latitude) {
+    public Ville(String nom, String maj, String codePostal, String longitude, String latitude, String codeinsee, String coderegion, String eloignement) {
         this.nom = nom;
         this.maj = maj;
         this.codePostal = codePostal;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.selected = false;
-        this.running = false;
+        this.codeinsee = codeinsee;
+        this.coderegion = coderegion;
+        this.eloignement = eloignement;
     }
 
     public Ville() {
@@ -28,26 +30,32 @@ public class Ville {
     }
 
     public String getNom() {
+
         return nom;
     }
 
     public void setNom(String nom) {
+
         this.nom = nom;
     }
 
     public String getMaj() {
+
         return maj;
     }
 
     public void setMaj(String maj) {
+
         this.maj = maj;
     }
 
     public String getCodePostal() {
+
         return codePostal;
     }
 
     public void setCodePostal(String codePostal) {
+
         this.codePostal = codePostal;
     }
 
@@ -67,20 +75,28 @@ public class Ville {
         this.latitude = latitude;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public String getCodeinsee() {
+        return codeinsee;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setCodeinsee(String codeinsee) {
+        this.codeinsee = codeinsee;
     }
 
-    public boolean isRunning() {
-        return running;
+    public String getCoderegion() {
+        return coderegion;
     }
 
-    public void setRuning(boolean running) {
-        this.running = running;
+    public void setCoderegion(String coderegion) {
+        this.coderegion = coderegion;
+    }
+
+    public String getEloignement() {
+        return eloignement;
+    }
+
+    public void setEloignement(String eloignement) {
+        this.eloignement = eloignement;
     }
 
     @Override

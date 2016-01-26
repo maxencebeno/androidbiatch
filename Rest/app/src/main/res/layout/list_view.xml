@@ -27,5 +27,19 @@
         android:id="@+id/longitude"
         android:textColor="#000000" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/code_insee"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:clickable="true"
+        android:onClick="onDeleteButtonClick"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right" />
+
 
 </LinearLayout>
