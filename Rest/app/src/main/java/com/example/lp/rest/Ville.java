@@ -10,6 +10,8 @@ public class Ville {
     protected String codePostal;
     protected String longitude;
     protected String latitude;
+    private boolean selected;
+    private Boolean running;
 
     public Ville(String nom, String maj, String codePostal, String longitude, String latitude) {
         this.nom = nom;
@@ -17,6 +19,8 @@ public class Ville {
         this.codePostal = codePostal;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.selected = false;
+        this.running = false;
     }
 
     public Ville() {
@@ -61,6 +65,22 @@ public class Ville {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRuning(boolean running) {
+        this.running = running;
     }
 
     @Override
