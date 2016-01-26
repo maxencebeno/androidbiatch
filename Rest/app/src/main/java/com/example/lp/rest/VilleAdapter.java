@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,7 +93,14 @@ public class VilleAdapter extends ArrayAdapter<Ville> {
                 postParams.put("action", "delete");
                 postParams.put("codeinsee", (String) codeInseeVille.getText());
 
-                MainActivity.performPostCall("http://10.0.2.2:80", postParams);
+                URL url = null;
+                try {
+                    url = new URL("http://10.0.2.2:80");
+                    String method = "POST";
+                    new MyAsyncTask(null, null, method, postParams).execute(url, null, method, postParams);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
