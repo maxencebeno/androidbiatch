@@ -18,6 +18,9 @@ public class Config {
     public static final String KEY_VILLE_CODE_POSTAL = "codepostal";
     public static final String KEY_VILLE_CODE_INSEE = "codeinsee";
     public static final String KEY_VILLE_CODE_REGION = "coderegion";
+    public static final String KEY_VILLE_LATITUDE = "latitude";
+    public static final String KEY_VILLE_LONGITUDE = "longitude";
+    public static final String KEY_VILLE_ELOIGNEMENT = "eloignement";
 
     //JSON Tags
     public static final String TAG_JSON_ARRAY = "villes";
@@ -25,6 +28,7 @@ public class Config {
     public static final String TAG_NOM = "Nom_Ville";
     public static final String TAG_MAJ = "MAJ";
     public static final String TAG_CP = "Code_Postal";
+    public static final String TAG_CODE_REGION = "Code_Region";
     public static final String TAG_LONGITUDE = "Longitude";
     public static final String TAG_LATITUDE = "Latitude";
     public static final String TAG_ELOIGNEMENT = "Eloignement";

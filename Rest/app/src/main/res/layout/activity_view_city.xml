@@ -13,16 +13,16 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter la ville"
-        android:id="@+id/buttonAdd"
+        android:text="Mettre à jour la ville"
+        android:id="@+id/buttonUpdate"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Voir la ville"
-        android:id="@+id/buttonView"
+        android:text="Supprimer la ville"
+        android:id="@+id/buttonDelete"
         android:layout_below="@+id/buttonAdd"
         android:layout_alignParentStart="true" />
 
@@ -48,7 +48,9 @@
         android:id="@+id/editTextCodeInsee"
         android:layout_below="@+id/editTextNomVille"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextNomVille" />
+        android:layout_alignEnd="@+id/editTextNomVille"
+        android:editable="false"
+        android:enabled="true" />
 
     <EditText
         android:layout_width="wrap_content"

@@ -1,95 +1,112 @@
 package com.example.lp.rest;
 
-import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
-    protected ListView lv;
-    protected ArrayList<Ville> list;
-    protected VilleAdapter adapter;
-    protected View.OnTouchListener gestureListener;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    //Defining views
+    private EditText editTextNomVille;
+    private EditText editTextCP;
+    private EditText editTextCodeInsee;
+    private EditText editTextCodeRegion;
+    private EditText editTextCodeLatitude;
+    private EditText editTextCodeLongitude;
+    private EditText editTextCodeEloignement;
+
+    private Button buttonAdd;
+    private Button buttonView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        list = new ArrayList<Ville>();
-        lv = (ListView) findViewById(R.id.listView);
+        //Initializing views
+        editTextNomVille = (EditText) findViewById(R.id.editTextNomVille);
+        editTextCP = (EditText) findViewById(R.id.editTextCP);
+        editTextCodeInsee = (EditText) findViewById(R.id.editTextCodeInsee);
+        editTextCodeRegion = (EditText) findViewById(R.id.editTextCodeRegion);
+        editTextCodeLatitude = (EditText) findViewById(R.id.editTextLatitude);
+        editTextCodeLongitude = (EditText) findViewById(R.id.editTextLongitude);
+        editTextCodeEloignement = (EditText) findViewById(R.id.editTextEloignement);
 
-        adapter = new VilleAdapter(this, R.layout.list_view, list, lv);
+        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        buttonView = (Button) findViewById(R.id.buttonView);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Ville ville = (Ville) lv.getItemAtPosition(position);
-
-                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
-                //on attribut un titre à notre boite de dialogue
-                adb.setTitle("Ville choisie");
-                //on insère un message à notre boite de dialogue, et ici on affiche le titre de l'item cliqué
-                adb.setMessage("Votre choix : " + ville.getNom());
-
-                ImageView imageView = (ImageView) findViewById(R.id.img);
-
-                imageView.setImageResource(R.drawable.delete);
-                //on indique que l'on veut le bouton ok à notre boite de dialogue
-                adb.setPositiveButton("Ok", null);
-                //on affiche la boite de dialogue
-                adb.show();
-            }
-        });
-        adapter.notifyDataSetChanged();
-
+        //Setting listeners to button
+        buttonAdd.setOnClickListener(this);
+        buttonView.setOnClickListener(this);
     }
 
-    public void onAsyncButtonClick(View view) throws IOException {
-        EditText nomVille = (EditText) findViewById(R.id.search_input);
-        String method = "GET";
-        lv.setAdapter(null);
 
-        if (!nomVille.getText().equals("")) {
-            URL url = null;
+    //Adding an employee
+    private void addEmployee(){
 
-            RadioGroup radioButtonGroup = (RadioGroup) findViewById(R.id.radioGroup);
-            int selectedId = radioButtonGroup.getCheckedRadioButtonId();
+        final String nomVille = editTextNomVille.getText().toString().trim();
+        final String cpVille = editTextCP.getText().toString().trim();
+        final String codeInsee = editTextCodeInsee.getText().toString().trim();
+        final String codeRegion = editTextCodeRegion.getText().toString().trim();
+        final String latitude = editTextCodeLatitude.getText().toString().trim();
+        final String longitude = editTextCodeLongitude.getText().toString().trim();
+        final String eloignement = editTextCodeEloignement.getText().toString().trim();
 
-            // Check which radio button was clicked
-            switch (selectedId) {
-                case R.id.nom_ville:
-                    url = new URL("http://10.0.2.2:80?filtre=nom&q=" + nomVille.getText());
-                    break;
-                case R.id.cp_ville:
-                    url = new URL("http://10.0.2.2:80?filtre=codepostal&q=" + nomVille.getText());
-                    break;
-                case R.id.code_insee:
-                    url = new URL("http://10.0.2.2:80?filtre=codeinsee&q=" + nomVille.getText());
-                    break;
-                case R.id.code_region:
-                    url = new URL("http://10.0.2.2:80?filtre=coderegion&q=" + nomVille.getText());
-                    break;
+        class AddEmployee extends AsyncTask<Void,Void,String>{
+
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(MainActivity.this,"Adding...","Wait...",false,false);
             }
 
-            new MyAsyncTask(adapter, list, method, null).execute(url, lv, method);
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(MainActivity.this,s,Toast.LENGTH_LONG).show();
+            }
 
-        } else {
-            URL url = new URL("http://10.0.2.2:80");
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String,String> params = new HashMap<>();
+                params.put(Config.KEY_VILLE_NOM,nomVille);
+                params.put(Config.KEY_VILLE_CODE_POSTAL,cpVille);
+                params.put(Config.KEY_VILLE_CODE_INSEE,codeInsee);
+                params.put(Config.KEY_VILLE_CODE_REGION,codeRegion);
+                params.put(Config.KEY_VILLE_LATITUDE,latitude);
+                params.put(Config.KEY_VILLE_LONGITUDE,longitude);
+                params.put(Config.KEY_VILLE_ELOIGNEMENT,eloignement);
+                params.put(Config.KEY_VILLE_MAJ,nomVille.toUpperCase());
 
-            new MyAsyncTask(adapter, list, method, null).execute(url, lv, method);
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(Config.URL_ADD, params);
+                return res;
+            }
         }
-        adapter.notifyDataSetChanged();
 
+        AddEmployee ae = new AddEmployee();
+        ae.execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == buttonAdd){
+            addEmployee();
+        }
+
+        if(v == buttonView){
+            startActivity(new Intent(this, ViewAllCities.class));
+        }
     }
 }

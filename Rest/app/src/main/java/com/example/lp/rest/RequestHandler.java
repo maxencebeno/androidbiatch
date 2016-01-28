@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by maxencebeno on 28/01/2016.
  */
 public class RequestHandler {
-    
+
     //Method to send httpPostRequest
     //This method is taking two arguments
     //First argument is the URL of the script to which we will send the request
