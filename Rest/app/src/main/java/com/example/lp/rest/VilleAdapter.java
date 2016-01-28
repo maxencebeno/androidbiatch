@@ -12,25 +12,28 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class VilleAdapter extends ArrayAdapter<Ville> {
 
     int resource;
-    List<Ville> items;
+    ArrayList<Ville> items;
     Context context;
+    ListView lv;
 
     //Initialize adapter
-    public VilleAdapter(Context context, int resource, List<Ville> items) {
+    public VilleAdapter(Context context, int resource, ArrayList<Ville> items, ListView lv) {
         super(context, resource, items);
         this.resource = resource;
         this.items = items;
         this.context = context;
+        this.lv = lv;
     }
 
 
@@ -97,7 +100,7 @@ public class VilleAdapter extends ArrayAdapter<Ville> {
                 try {
                     url = new URL("http://10.0.2.2:80");
                     String method = "POST";
-                    new MyAsyncTask(null, null, method, postParams).execute(url, null, method, postParams);
+                    new MyAsyncTask(VilleAdapter.this, items, method, postParams).execute(url, lv, method, postParams);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }

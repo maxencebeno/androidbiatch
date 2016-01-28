@@ -1,7 +1,6 @@
 package com.example.lp.rest;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -114,28 +113,34 @@ public class MyAsyncTask extends AsyncTask<Object, ListView, String> {
     @Override
     protected void onPostExecute(String result) {
 
-        try {
-            JSONObject json = new JSONObject(result);
+        if (method == "GET") {
+            try {
+                JSONObject json = new JSONObject(result);
 
-            JSONArray villes = json.getJSONArray("villes");
+                JSONArray villes = json.getJSONArray("villes");
 
-            for (int i = 0 ; i < villes.length() ; i++) {
-                JSONObject ville = villes.getJSONObject(i);
-                Ville villeArray = new Ville();
-                villeArray.setNom(ville.getString("Nom_Ville"));
-                villeArray.setNom(ville.getString("MAJ"));
-                villeArray.setCodePostal(ville.getString("Code_Postal"));
-                villeArray.setLongitude(ville.getString("Longitude"));
-                villeArray.setLatitude(ville.getString("Latitude"));
-                villeArray.setCodeinsee(ville.getString("Code_INSEE"));
-                list.add(villeArray);
+                for (int i = 0; i < villes.length(); i++) {
+                    JSONObject ville = villes.getJSONObject(i);
+                    Ville villeArray = new Ville();
+                    villeArray.setNom(ville.getString("Nom_Ville"));
+                    villeArray.setNom(ville.getString("MAJ"));
+                    villeArray.setCodePostal(ville.getString("Code_Postal"));
+                    villeArray.setLongitude(ville.getString("Longitude"));
+                    villeArray.setLatitude(ville.getString("Latitude"));
+                    villeArray.setCodeinsee(ville.getString("Code_INSEE"));
+                    villeArray.setCoderegion(ville.getString("Code_Region"));
+                    villeArray.setEloignement(ville.getString("Eloignement"));
+                    list.add(villeArray);
+                }
+
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-            lv.setAdapter(adapter);
+        } else {
             adapter.notifyDataSetChanged();
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 

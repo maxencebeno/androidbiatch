@@ -5,6 +5,7 @@ package com.example.lp.rest;
  */
 public class Ville {
 
+    protected int id;
     protected String nom;
     protected String maj;
     protected String codePostal;
@@ -14,7 +15,8 @@ public class Ville {
     protected String coderegion;
     protected String eloignement;
 
-    public Ville(String nom, String maj, String codePostal, String longitude, String latitude, String codeinsee, String coderegion, String eloignement) {
+    public Ville(int id, String nom, String maj, String codePostal, String longitude, String latitude, String codeinsee, String coderegion, String eloignement) {
+        this.id = id;
         this.nom = nom;
         this.maj = maj;
         this.codePostal = codePostal;
@@ -27,6 +29,14 @@ public class Ville {
 
     public Ville() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {

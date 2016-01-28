@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<Ville>();
         lv = (ListView) findViewById(R.id.listView);
 
-        adapter = new VilleAdapter(this, R.layout.list_view, list);
+        adapter = new VilleAdapter(this, R.layout.list_view, list, lv);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public void onAsyncButtonClick(View view) throws IOException {
         EditText nomVille = (EditText) findViewById(R.id.search_input);
         String method = "GET";
+        lv.setAdapter(null);
 
         if (!nomVille.getText().equals("")) {
             URL url = null;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             new MyAsyncTask(adapter, list, method, null).execute(url, lv, method);
         }
+        adapter.notifyDataSetChanged();
 
     }
 }
