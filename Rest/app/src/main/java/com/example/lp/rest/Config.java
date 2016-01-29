@@ -6,11 +6,11 @@ package com.example.lp.rest;
 public class Config {
 
     //Address of our scripts of the CRUD
-    public static final String URL_ADD = "http://10.0.2.2/api.php?action=create";
-    public static final String URL_GET_ALL = "http://10.0.2.2/api.php";
-    public static final String URL_GET_VILLE = "http://10.0.2.2/api.php?filtre=";
-    public static final String URL_UPDATE_VILLE = "http://10.0.2.2/api.php?action=update&codeinsee=";
-    public static final String URL_DELETE_VILLE = "http://10.0.2.2/api.php?action=delete&codeinsee=";
+    public static final String URL_ADD = "http://10.0.2.2/api.php";
+    public static final String URL_GET_ALL = "http://10.0.2.2/api.php?action=all";
+    public static final String URL_GET_VILLE = "http://10.0.2.2/api.php";
+    public static final String URL_UPDATE_VILLE = "http://10.0.2.2/api.php";
+    public static final String URL_DELETE_VILLE = "http://10.0.2.2/api.php";
 
     //Keys that will be used to send the request to php scripts
     public static final String KEY_VILLE_NOM = "nom";

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //Adding an employee
-    private void addEmployee(){
+    private void addVille(){
 
         final String nomVille = editTextNomVille.getText().toString().trim();
         final String cpVille = editTextCP.getText().toString().trim();
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String longitude = editTextCodeLongitude.getText().toString().trim();
         final String eloignement = editTextCodeEloignement.getText().toString().trim();
 
-        class AddEmployee extends AsyncTask<Void,Void,String>{
+        class AddVille extends AsyncTask<Void,Void,String>{
 
             ProgressDialog loading;
 
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected String doInBackground(Void... v) {
                 HashMap<String,String> params = new HashMap<>();
+                params.put("action", "create");
                 params.put(Config.KEY_VILLE_NOM,nomVille);
                 params.put(Config.KEY_VILLE_CODE_POSTAL,cpVille);
                 params.put(Config.KEY_VILLE_CODE_INSEE,codeInsee);
@@ -95,14 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        AddEmployee ae = new AddEmployee();
-        ae.execute();
+        AddVille av = new AddVille();
+        av.execute();
     }
 
     @Override
     public void onClick(View v) {
         if(v == buttonAdd){
-            addEmployee();
+            addVille();
         }
 
         if(v == buttonView){

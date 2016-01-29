@@ -34,7 +34,7 @@ public class ViewAllCities extends AppCompatActivity implements ListView.OnItemC
     }
 
 
-    private void showEmployee(){
+    private void showVille(){
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
         try {
@@ -81,7 +81,7 @@ public class ViewAllCities extends AppCompatActivity implements ListView.OnItemC
                 super.onPostExecute(s);
                 loading.dismiss();
                 JSON_STRING = s;
-                showEmployee();
+                showVille();
             }
 
             @Override

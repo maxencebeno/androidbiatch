@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Mettre à jour la ville"
         android:id="@+id/buttonUpdate"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
     <Button
@@ -23,127 +23,127 @@
         android:layout_height="wrap_content"
         android:text="Supprimer la ville"
         android:id="@+id/buttonDelete"
-        android:layout_below="@+id/buttonAdd"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextNomVille"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:width="150dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextCP"
-        android:layout_alignTop="@+id/editTextNomVille"
-        android:layout_alignParentEnd="true"
-        android:width="150dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextCodeInsee"
-        android:layout_below="@+id/editTextNomVille"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextNomVille"
-        android:editable="false"
-        android:enabled="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextCodeRegion"
-        android:layout_alignBottom="@+id/editTextCodeInsee"
+        android:width="150dp"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/buttonDelete"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/editTextCP" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/editTextCP"
+        android:width="150dp"
+        android:layout_alignBottom="@+id/textViewCP"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textViewNomVille" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCodeInsee"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:width="150dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCodeRegion"
+        android:layout_alignTop="@+id/editTextCodeInsee"
+        android:layout_alignEnd="@+id/editTextCP"
+        android:width="150dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/editTextLatitude"
-        android:layout_below="@+id/editTextCodeInsee"
+        android:layout_below="@+id/textViewLatitude"
+        android:layout_alignEnd="@+id/textViewLatitude"
+        android:layout_alignStart="@+id/editTextCodeRegion" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextLongitude"
+        android:layout_below="@+id/textViewLongitude"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/editTextCodeInsee" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextLongitude"
-        android:layout_alignTop="@+id/editTextLatitude"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editTextCodeRegion" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/editTextEloignement"
-        android:layout_below="@+id/editTextLatitude"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextLatitude" />
+        android:layout_above="@+id/buttonUpdate"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nom de la ville"
         android:id="@+id/textViewNomVille"
-        android:layout_alignBaseline="@+id/editTextNomVille"
         android:layout_alignBottom="@+id/editTextNomVille"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="21dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Code postal"
         android:id="@+id/textViewCP"
-        android:layout_alignTop="@+id/textViewNomVille"
-        android:layout_alignEnd="@+id/editTextCP"
-        android:layout_marginEnd="22dp" />
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/textViewNomVille"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Code INSEE"
         android:id="@+id/textViewCodeInsee"
-        android:layout_alignBaseline="@+id/editTextCodeInsee"
-        android:layout_alignBottom="@+id/editTextCodeInsee"
-        android:layout_alignStart="@+id/textViewNomVille" />
+        android:layout_above="@+id/editTextCodeInsee"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Code région"
         android:id="@+id/textViewCodeRegion"
-        android:layout_alignTop="@+id/textViewCodeInsee"
-        android:layout_alignStart="@+id/textViewCP" />
+        android:layout_above="@+id/editTextCodeRegion"
+        android:layout_alignStart="@+id/editTextCodeRegion" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Latitude"
         android:id="@+id/textViewLatitude"
-        android:layout_alignBaseline="@+id/editTextLatitude"
-        android:layout_alignBottom="@+id/editTextLatitude"
-        android:layout_alignStart="@+id/textViewCodeInsee" />
+        android:layout_alignTop="@+id/textViewLongitude"
+        android:layout_alignEnd="@+id/buttonUpdate" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Longitude"
         android:id="@+id/textViewLongitude"
-        android:layout_alignTop="@+id/textViewLatitude"
-        android:layout_alignStart="@+id/textViewCodeRegion" />
+        android:layout_below="@+id/editTextCodeInsee"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eloignement"
         android:id="@+id/textViewEloignement"
-        android:layout_alignBaseline="@+id/editTextEloignement"
-        android:layout_alignBottom="@+id/editTextEloignement"
-        android:layout_alignStart="@+id/textViewLatitude" />
+        android:layout_above="@+id/buttonUpdate"
+        android:layout_toStartOf="@+id/editTextCodeRegion"
+        android:layout_marginBottom="45dp" />
 
 </RelativeLayout>

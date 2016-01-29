@@ -42,10 +42,18 @@ $method = $_SERVER['REQUEST_METHOD'];
  */
 switch ($method) {
     case 'GET' : {
-        try{
-            getVille();
-        }catch(Exception $e){
-            echo $e->getMessage();
+        if (isset($_GET['action']) && $_GET['action'] == "all") {
+            try {
+                getVilles();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        } else {
+            try {
+                getVille();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     } break;
     case 'DELETE' : {
