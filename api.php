@@ -57,10 +57,10 @@ switch ($method) {
         }
     } break;
     case 'DELETE' : {
-        //delete_ville();
+        //deleteVille();
     } break;
     case 'PUT' : {
-        //update_ville();
+        //updateVille();
     } break;
     case 'POST' : {
         if(isset($_POST['action'])) {
@@ -136,7 +136,7 @@ function getVille() {
         header('Content-Type: application/json');
         echo json_encode($newArray);
     } else {
-        throw new \Exception('You must provqe an argument for the city you are looking for.');
+        throw new \Exception('You must provide an argument for the city you are looking for.');
     }
 }
 
@@ -153,6 +153,50 @@ function deleteVille()
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':Code_INSEE', $_POST['codeinsee'], PDO::PARAM_INT);
         $stmt->execute();
+    }
+}
+
+/**
+ * Update une ville à partir de son Code Insee et des données POST
+ */
+function updateVille()
+{
+    global $pdo;
+
+    if (isset($_POST)) {
+        $req = $pdo->prepare('UPDATE villes SET Nom_Ville = :nomville, MAJ = :maj, Code_Postal = :codepostal, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement WHERE Code_Insee = :codeinsee');
+        $req->execute(array(
+            'nomville' => $_POST['nomville'],
+            'maj' => $_POST['maj'],
+            'codepostal' => $_POST['codepostal'],
+            'coderegion' => $_POST['coderegion'],
+            'latitude' => $_POST['latitude'],
+            'longitude' => $_POST['longitude'],
+            'eloignement' => $_POST['eloignement'],
+            'codeinsee' => $_POST['codeinsee'],
+        ));
+    }
+}
+
+/**
+ *  Crée une ville à partir de données POST
+ */
+function createVille()
+{
+    global $pdo;
+
+    if (isset($_POST)) {
+        $req = $pdo->prepare('INSERT INTO villes VALUES (Nom_Ville = :nomville,  MAJ = :maj, Code_Postal = :codepostal, Code_Insee = :codeinsee, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement)');
+        $req->execute(array(
+            'nomville' => $_POST['nomville'],
+            'maj' => $_POST['maj'],
+            'codepostal' => $_POST['codepostal'],
+            'codeinsee' => $_POST['codeinsee'],
+            'coderegion' => $_POST['coderegion'],
+            'latitude' => $_POST['latitude'],
+            'longitude' => $_POST['longitude'],
+            'eloignement' => $_POST['eloignement']
+        ));
     }
 }
 

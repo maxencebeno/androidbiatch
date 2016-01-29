@@ -11,3 +11,6 @@ RewriteRule ^api/getville/([a-zA-Z0-9_-]+)/([0-9_-]+)$ api.php?filtre=$1&q=2 [QS
 
 # Route qui permet de supprimer une ville en fournissant l'ID de la ville
 RewriteRule ^api/deleteville api.php [QSA]
+
+# Route qui permet de mettre à jour une ville avec tous les paramètres
+RewriteRule ^api/updateville api.php [QSA]
