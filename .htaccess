@@ -14,3 +14,6 @@ RewriteRule ^api/deleteville api.php [QSA]
 
 # Route qui permet de mettre à jour une ville avec tous les paramètres
 RewriteRule ^api/updateville api.php [QSA]
+
+# Route qui permet de  créer une ville avec tous les paramètres
+RewriteRule ^api/createville api.php [QSA]
