@@ -82,13 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 HashMap<String,String> params = new HashMap<>();
                 params.put("action", "create");
                 params.put(Config.KEY_VILLE_NOM,nomVille);
+                params.put(Config.KEY_VILLE_MAJ,nomVille.toUpperCase());
                 params.put(Config.KEY_VILLE_CODE_POSTAL,cpVille);
                 params.put(Config.KEY_VILLE_CODE_INSEE,codeInsee);
                 params.put(Config.KEY_VILLE_CODE_REGION,codeRegion);
                 params.put(Config.KEY_VILLE_LATITUDE,latitude);
                 params.put(Config.KEY_VILLE_LONGITUDE,longitude);
                 params.put(Config.KEY_VILLE_ELOIGNEMENT,eloignement);
-                params.put(Config.KEY_VILLE_MAJ,nomVille.toUpperCase());
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.sendPostRequest(Config.URL_ADD, params);

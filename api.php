@@ -164,9 +164,9 @@ function updateVille()
     global $pdo;
 
     if (isset($_POST)) {
-        $req = $pdo->prepare('UPDATE villes SET Nom_Ville = :nomville, MAJ = :maj, Code_Postal = :codepostal, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement WHERE Code_Insee = :codeinsee');
+        $req = $pdo->prepare('UPDATE villes SET Nom_Ville = :nomville, MAJ = :maj, Code_Postal = :codepostal, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement WHERE Code_INSEE = :codeinsee');
         $req->execute(array(
-            'nomville' => $_POST['nomville'],
+            'nomville' => strtolower($_POST['maj']),
             'maj' => $_POST['maj'],
             'codepostal' => $_POST['codepostal'],
             'coderegion' => $_POST['coderegion'],
@@ -186,16 +186,16 @@ function createVille()
     global $pdo;
 
     if (isset($_POST)) {
-        $req = $pdo->prepare('INSERT INTO villes VALUES (Nom_Ville = :nomville,  MAJ = :maj, Code_Postal = :codepostal, Code_Insee = :codeinsee, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement)');
+        $req = $pdo->prepare('INSERT INTO villes (Nom_Ville, MAJ, Code_Postal, Code_INSEE, Code_Region, Latitude, Longitude, Eloignement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $req->execute(array(
-            'nomville' => $_POST['nomville'],
-            'maj' => $_POST['maj'],
-            'codepostal' => $_POST['codepostal'],
-            'codeinsee' => $_POST['codeinsee'],
-            'coderegion' => $_POST['coderegion'],
-            'latitude' => $_POST['latitude'],
-            'longitude' => $_POST['longitude'],
-            'eloignement' => $_POST['eloignement']
+            strtolower($_POST['maj']),
+            $_POST['maj'],
+            $_POST['codepostal'],
+            $_POST['codeinsee'],
+            $_POST['coderegion'],
+            $_POST['latitude'],
+            $_POST['longitude'],
+            $_POST['eloignement']
         ));
     }
 }

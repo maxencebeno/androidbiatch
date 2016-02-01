@@ -1,6 +1,6 @@
 package com.example.lp.rest;
 
-        import android.app.ProgressDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -42,13 +42,13 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
 
         codeinsee = intent.getStringExtra(Config.VILLE_ID);
 
-        editTextCodePostal = (EditText) findViewById(R.id.editTextCP);
-        editTextCodeInsee = (EditText) findViewById(R.id.editTextCodeInsee);
-        editTextNom = (EditText) findViewById(R.id.editTextNomVille);
-        editTextCodeRegion = (EditText) findViewById(R.id.editTextCodeRegion);
-        editTextLatitude = (EditText) findViewById(R.id.editTextLatitude);
-        editTextLongitude = (EditText) findViewById(R.id.editTextLongitude);
-        editTextEloignement = (EditText) findViewById(R.id.editTextEloignement);
+        editTextCodePostal = (EditText) findViewById(R.id.editTextCPShow);
+        editTextCodeInsee = (EditText) findViewById(R.id.editTextCodeInseeShow);
+        editTextNom = (EditText) findViewById(R.id.editTextNomVilleShow);
+        editTextCodeRegion = (EditText) findViewById(R.id.editTextCodeRegionShow);
+        editTextLatitude = (EditText) findViewById(R.id.editTextLatitudeShow);
+        editTextLongitude = (EditText) findViewById(R.id.editTextLongitudeShow);
+        editTextEloignement = (EditText) findViewById(R.id.editTextEloignementShow);
 
         buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
         buttonDelete = (Button) findViewById(R.id.buttonDelete);
@@ -68,6 +68,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
             protected void onPreExecute() {
                 super.onPreExecute();
                 loading = ProgressDialog.show(ViewCity.this,"Fetching...","Wait...",false,false);
+
             }
 
             @Override
@@ -81,6 +82,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
                 String s = rh.sendGetRequestParam(Config.URL_GET_VILLE,codeinsee);
+
                 return s;
             }
         }
@@ -140,7 +142,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
             @Override
             protected String doInBackground(Void... params) {
                 HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put(Config.KEY_VILLE_CODE_INSEE,codeinsee);
+                hashMap.put("action", "update");
                 hashMap.put(Config.KEY_VILLE_NOM,nom);
                 hashMap.put(Config.KEY_VILLE_MAJ,maj);
                 hashMap.put(Config.KEY_VILLE_CODE_POSTAL,codepostal);
@@ -148,6 +150,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
                 hashMap.put(Config.KEY_VILLE_LATITUDE,latitude);
                 hashMap.put(Config.KEY_VILLE_LONGITUDE,longitude);
                 hashMap.put(Config.KEY_VILLE_ELOIGNEMENT,eloignement);
+                hashMap.put(Config.KEY_VILLE_CODE_INSEE,codeinsee);
 
                 RequestHandler rh = new RequestHandler();
 
@@ -180,8 +183,14 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             protected String doInBackground(Void... params) {
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("action", "delete");
+                hashMap.put(Config.KEY_VILLE_CODE_INSEE,codeinsee);
+
                 RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequestParam(Config.URL_DELETE_VILLE, codeinsee);
+
+                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE, hashMap);
+
                 return s;
             }
         }

@@ -29,17 +29,17 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextNomVille"
+        android:id="@+id/editTextNomVilleShow"
         android:width="150dp"
         android:layout_marginTop="31dp"
         android:layout_below="@+id/buttonDelete"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editTextCP" />
+        android:layout_alignStart="@+id/editTextCPShow" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextCP"
+        android:id="@+id/editTextCPShow"
         android:width="150dp"
         android:layout_alignBottom="@+id/textViewCP"
         android:layout_alignParentEnd="true"
@@ -48,7 +48,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextCodeInsee"
+        android:id="@+id/editTextCodeInseeShow"
         android:editable="false"
         android:enabled="true"
         android:layout_centerVertical="true"
@@ -58,31 +58,31 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextCodeRegion"
-        android:layout_alignTop="@+id/editTextCodeInsee"
-        android:layout_alignEnd="@+id/editTextCP"
+        android:id="@+id/editTextCodeRegionShow"
+        android:layout_alignTop="@+id/editTextCodeInseeShow"
+        android:layout_alignEnd="@+id/editTextCPShow"
         android:width="150dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextLatitude"
+        android:id="@+id/editTextLatitudeShow"
         android:layout_below="@+id/textViewLatitude"
         android:layout_alignEnd="@+id/textViewLatitude"
-        android:layout_alignStart="@+id/editTextCodeRegion" />
+        android:layout_alignStart="@+id/editTextCodeRegionShow" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextLongitude"
+        android:id="@+id/editTextLongitudeShow"
         android:layout_below="@+id/textViewLongitude"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextCodeInsee" />
+        android:layout_alignEnd="@+id/editTextCodeInseeShow" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextEloignement"
+        android:id="@+id/editTextEloignementShow"
         android:layout_above="@+id/buttonUpdate"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text="Nom de la ville"
         android:id="@+id/textViewNomVille"
-        android:layout_alignBottom="@+id/editTextNomVille"
+        android:layout_alignBottom="@+id/editTextNomVilleShow"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:text="Code INSEE"
         android:id="@+id/textViewCodeInsee"
-        android:layout_above="@+id/editTextCodeInsee"
+        android:layout_above="@+id/editTextCodeInseeShow"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -117,8 +117,8 @@
         android:layout_height="wrap_content"
         android:text="Code région"
         android:id="@+id/textViewCodeRegion"
-        android:layout_above="@+id/editTextCodeRegion"
-        android:layout_alignStart="@+id/editTextCodeRegion" />
+        android:layout_above="@+id/editTextCodeRegionShow"
+        android:layout_alignStart="@+id/editTextCodeRegionShow" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="Longitude"
         android:id="@+id/textViewLongitude"
-        android:layout_below="@+id/editTextCodeInsee"
+        android:layout_below="@+id/editTextCodeInseeShow"
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp" />
 
@@ -143,7 +143,7 @@
         android:text="Eloignement"
         android:id="@+id/textViewEloignement"
         android:layout_above="@+id/buttonUpdate"
-        android:layout_toStartOf="@+id/editTextCodeRegion"
+        android:layout_toStartOf="@+id/editTextCodeRegionShow"
         android:layout_marginBottom="45dp" />
 
 </RelativeLayout>
