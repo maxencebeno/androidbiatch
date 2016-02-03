@@ -1,7 +1,5 @@
 package com.example.lp.rest;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -42,7 +40,6 @@ public class RequestHandler {
             //Configuring connection properties
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            Log.v("test", action);
             switch (action) {
                 case "create":
                     conn.setRequestMethod("POST");

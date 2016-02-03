@@ -187,7 +187,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
 
                 RequestHandler rh = new RequestHandler();
 
-                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE, hashMap, "delete");
+                String s = rh.sendPostRequest(Config.URL_DELETE_VILLE, hashMap, "delete");
 
                 return s;
             }
@@ -201,7 +201,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Etes vous sur de vouloir supprimer cette ville ?");
 
-        alertDialogBuilder.setPositiveButton("Yes",
+        alertDialogBuilder.setPositiveButton("Oui",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -210,7 +210,7 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
                     }
                 });
 
-        alertDialogBuilder.setNegativeButton("No",
+        alertDialogBuilder.setNegativeButton("Non",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
