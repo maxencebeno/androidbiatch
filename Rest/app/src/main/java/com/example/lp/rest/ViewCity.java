@@ -142,19 +142,18 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
             @Override
             protected String doInBackground(Void... params) {
                 HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("action", "update");
                 hashMap.put(Config.KEY_VILLE_NOM,nom);
                 hashMap.put(Config.KEY_VILLE_MAJ,maj);
                 hashMap.put(Config.KEY_VILLE_CODE_POSTAL,codepostal);
                 hashMap.put(Config.KEY_VILLE_CODE_REGION,coderegion);
                 hashMap.put(Config.KEY_VILLE_LATITUDE,latitude);
                 hashMap.put(Config.KEY_VILLE_LONGITUDE,longitude);
-                hashMap.put(Config.KEY_VILLE_ELOIGNEMENT,eloignement);
-                hashMap.put(Config.KEY_VILLE_CODE_INSEE,codeinsee);
+                hashMap.put(Config.KEY_VILLE_ELOIGNEMENT, eloignement);
+                hashMap.put(Config.KEY_VILLE_CODE_INSEE, codeinsee);
 
                 RequestHandler rh = new RequestHandler();
 
-                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE,hashMap);
+                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE,hashMap, "update");
 
                 return s;
             }
@@ -184,12 +183,11 @@ public class ViewCity extends AppCompatActivity implements View.OnClickListener 
             @Override
             protected String doInBackground(Void... params) {
                 HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("action", "delete");
                 hashMap.put(Config.KEY_VILLE_CODE_INSEE,codeinsee);
 
                 RequestHandler rh = new RequestHandler();
 
-                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE, hashMap);
+                String s = rh.sendPostRequest(Config.URL_UPDATE_VILLE, hashMap, "delete");
 
                 return s;
             }

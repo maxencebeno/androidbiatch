@@ -1,5 +1,7 @@
 package com.example.lp.rest;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -24,7 +26,7 @@ public class RequestHandler {
     //First argument is the URL of the script to which we will send the request
     //Other is an HashMap with name value pairs containing the data to be send with the request
     public String sendPostRequest(String requestURL,
-                                  HashMap<String, String> postDataParams) {
+                                  HashMap<String, String> postDataParams, String action) {
         //Creating a URL
         URL url;
 
@@ -40,7 +42,20 @@ public class RequestHandler {
             //Configuring connection properties
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            conn.setRequestMethod("POST");
+            Log.v("test", action);
+            switch (action) {
+                case "create":
+                    conn.setRequestMethod("POST");
+                    break;
+                case "update":
+                    conn.setRequestMethod("PUT");
+                    break;
+                case "delete":
+                    conn.setRequestMethod("DELETE");
+                    break;
+                default:
+                    conn.setRequestMethod("POST");
+            }
             conn.setDoInput(true);
             conn.setDoOutput(true);
 

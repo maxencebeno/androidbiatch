@@ -41,7 +41,7 @@ $method = $_SERVER['REQUEST_METHOD'];
  * Application du verbe sur la ressource
  */
 switch ($method) {
-    case 'GET' : {
+    case 'GET' :
         if (isset($_GET['action']) && $_GET['action'] == "all") {
             try {
                 getVilles();
@@ -55,33 +55,26 @@ switch ($method) {
                 echo $e->getMessage();
             }
         }
-    } break;
-    case 'DELETE' : {
-        //deleteVille();
-    } break;
-    case 'PUT' : {
-        //updateVille();
-    } break;
-    case 'POST' : {
-        if(isset($_POST['action'])) {
-            if ($_POST['action'] == "delete") {
-                deleteVille();
-            } else if ($_POST['action'] == "create") {
-                createVille();
-            } else if ($_POST['action'] == "update") {
-                updateVille();
-            }
-        }
-    } break;
-    default : {
+        break;
+    case 'DELETE' :
+        deleteVille();
+        break;
+    case 'PUT' :
+        updateVille();
+        break;
+    case 'POST' :
+        createVille();
+        break;
+    default :
         echo "méthode inconnue";
-    }
+
 }
 
 /**
  * Exécute le verbe READ sur la ressource VILLES
  */
-function getVilles() {
+function getVilles()
+{
     global $pdo, $cols, $sql;
     /**
      * Requète SQL
@@ -107,18 +100,19 @@ function getVilles() {
 /**
  * Cherche une ville en fonction du paramètre q
  */
-function getVille() {
+function getVille()
+{
     global $pdo, $colonnesConverter, $sql;
-    
+
     if (isset($_GET['q'])) {
         $q = $_GET['q'];
-        
-        if(isset($_GET['filtre']) AND array_key_exists($_GET['filtre'], $colonnesConverter)){
+
+        if (isset($_GET['filtre']) AND array_key_exists($_GET['filtre'], $colonnesConverter)) {
             // On a bien un nom de colonne valqe on continue
             $colRech = $colonnesConverter[$_GET['filtre']];
-            
+
             $sql = "SELECT * FROM `villes` WHERE $colRech LIKE '%$q%'";
-        }else{
+        } else {
             $sql = "SELECT * FROM `villes` WHERE Code_INSEE=$q";
         }
 
@@ -148,10 +142,12 @@ function deleteVille()
 {
     global $pdo, $sql;
 
-    if (isset($_POST['codeinsee'])) {
+    parse_str(file_get_contents("php://input"),$post_vars);
+
+    if (isset($post_vars['codeinsee'])) {
         $sql = "DELETE FROM villes WHERE Code_INSEE =  :Code_INSEE";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':Code_INSEE', $_POST['codeinsee'], PDO::PARAM_INT);
+        $stmt->bindParam(':Code_INSEE', $post_vars['codeinsee'], PDO::PARAM_INT);
         $stmt->execute();
     }
 }
@@ -163,17 +159,19 @@ function updateVille()
 {
     global $pdo;
 
-    if (isset($_POST)) {
+    parse_str(file_get_contents("php://input"),$post_vars);
+
+    if (isset($post_vars)) {
         $req = $pdo->prepare('UPDATE villes SET Nom_Ville = :nomville, MAJ = :maj, Code_Postal = :codepostal, Code_Region = :coderegion, Latitude = :latitude, Longitude = :longitude, Eloignement = :eloignement WHERE Code_INSEE = :codeinsee');
         $req->execute(array(
-            'nomville' => strtolower($_POST['maj']),
-            'maj' => $_POST['maj'],
-            'codepostal' => $_POST['codepostal'],
-            'coderegion' => $_POST['coderegion'],
-            'latitude' => $_POST['latitude'],
-            'longitude' => $_POST['longitude'],
-            'eloignement' => $_POST['eloignement'],
-            'codeinsee' => $_POST['codeinsee'],
+            'nomville' => strtolower($post_vars['maj']),
+            'maj' => $post_vars['maj'],
+            'codepostal' => $post_vars['codepostal'],
+            'coderegion' => $post_vars['coderegion'],
+            'latitude' => $post_vars['latitude'],
+            'longitude' => $post_vars['longitude'],
+            'eloignement' => $post_vars['eloignement'],
+            'codeinsee' => $post_vars['codeinsee'],
         ));
     }
 }

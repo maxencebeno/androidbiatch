@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected String doInBackground(Void... v) {
                 HashMap<String,String> params = new HashMap<>();
-                params.put("action", "create");
                 params.put(Config.KEY_VILLE_NOM,nomVille);
                 params.put(Config.KEY_VILLE_MAJ,nomVille.toUpperCase());
                 params.put(Config.KEY_VILLE_CODE_POSTAL,cpVille);
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 params.put(Config.KEY_VILLE_ELOIGNEMENT,eloignement);
 
                 RequestHandler rh = new RequestHandler();
-                String res = rh.sendPostRequest(Config.URL_ADD, params);
+                String res = rh.sendPostRequest(Config.URL_ADD, params, "create");
                 return res;
             }
         }
